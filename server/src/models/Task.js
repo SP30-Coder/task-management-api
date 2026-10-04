@@ -41,13 +41,12 @@ const taskSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // createdAt = Created Date, updatedAt = last update
+    timestamps: true, 
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 );
 
-// Index for search + filtering performance
 taskSchema.index({ user: 1, status: 1, priority: 1 });
 taskSchema.index({ title: 'text', description: 'text' });
 

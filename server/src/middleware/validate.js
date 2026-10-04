@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
 
-// Turns express-validator errors into a clean 400 response
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

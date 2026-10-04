@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Task = require('../models/Task');
 
-// @desc    Create a task
-// @route   POST /api/tasks
 const createTask = async (req, res, next) => {
   try {
     const { title, description, status, priority, dueDate } = req.body;
@@ -22,8 +20,6 @@ const createTask = async (req, res, next) => {
   }
 };
 
-// @desc    Get tasks with search, filter & pagination
-// @route   GET /api/tasks?search=&status=&priority=&page=1&limit=10&sortBy=createdAt&sortOrder=desc
 const getTasks = async (req, res, next) => {
   try {
     const { search, status, priority, sortBy = 'createdAt', sortOrder = 'desc' } = req.query;
@@ -34,7 +30,6 @@ const getTasks = async (req, res, next) => {
 
     const filter = { user: req.user._id };
 
-    // Filter by status
     if (status) {
       const validStatuses = ['Pending', 'In Progress', 'Completed'];
       if (!validStatuses.includes(status)) {
@@ -46,7 +41,6 @@ const getTasks = async (req, res, next) => {
       filter.status = status;
     }
 
-    // Filter by priority
     if (priority) {
       const validPriorities = ['Low', 'Medium', 'High'];
       if (!validPriorities.includes(priority)) {
@@ -58,7 +52,6 @@ const getTasks = async (req, res, next) => {
       filter.priority = priority;
     }
 
-    // Search by title / description (case-insensitive)
     if (search && search.trim() !== '') {
       const regex = new RegExp(search.trim(), 'i');
       filter.$or = [{ title: regex }, { description: regex }];
@@ -95,8 +88,6 @@ const getTasks = async (req, res, next) => {
   }
 };
 
-// @desc    Get a single task (owner only)
-// @route   GET /api/tasks/:id
 const getTaskById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -117,8 +108,6 @@ const getTaskById = async (req, res, next) => {
   }
 };
 
-// @desc    Update a task (owner only)
-// @route   PUT /api/tasks/:id
 const updateTask = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -152,8 +141,6 @@ const updateTask = async (req, res, next) => {
   }
 };
 
-// @desc    Delete a task (owner only)
-// @route   DELETE /api/tasks/:id
 const deleteTask = async (req, res, next) => {
   try {
     const { id } = req.params;

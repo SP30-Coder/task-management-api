@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Protect routes - requires valid JWT in Authorization: Bearer <token>
 const protect = async (req, res, next) => {
   let token;
 

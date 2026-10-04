@@ -12,7 +12,6 @@ const { createTaskValidation, updateTaskValidation } = require('../validators/ta
 
 const router = express.Router();
 
-// All task routes require authentication
 router.use(protect);
 
 router.route('/').post(createTaskValidation, validate, createTask).get(getTasks);

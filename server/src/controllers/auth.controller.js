@@ -1,8 +1,6 @@
 const User = require('../models/User');
 const { generateToken } = require('../middleware/auth');
 
-// @desc    Register a new user
-// @route   POST /api/auth/register
 const register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
@@ -28,8 +26,6 @@ const register = async (req, res, next) => {
   }
 };
 
-// @desc    Login user
-// @route   POST /api/auth/login
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -59,8 +55,6 @@ const login = async (req, res, next) => {
   }
 };
 
-// @desc    Get logged-in user profile
-// @route   GET /api/auth/profile
 const getProfile = async (req, res, next) => {
   try {
     res.status(200).json({
